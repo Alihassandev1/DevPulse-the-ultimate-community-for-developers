@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Post - DevPulse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    {% include 'layout/nav.html' %}
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <div class="glass-card">
+                    <div class="text-center mb-4">
+                        <h2 class="text-gradient">Create a New Post</h2>
+                        <p class="text-light opacity-75">Share your thoughts with the community</p>
+                    </div>
+
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                        <div class="mb-4">
+                            <label for="{{ field.id_for_label }}" class="form-label text-light fw-medium">{{ field.label
+                                }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                            <div class="form-text text-light opacity-50">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% if field.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ field.errors.0 }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                        <div class="d-flex justify-content-end gap-3 mt-4">
+                            <a href="{% url 'post:posthome' %}" class="btn btn-outline-light px-4">Cancel</a>
+                            <button type="submit" class="btn btn-gradient px-4">Publish Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'layout/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(function (input) {
+                input.classList.add('form-control', 'form-control-glass');
+                if (input.type === 'file') {
+                    input.classList.add('p-2'); // Add padding for file input for better look
+                }
+                if (input.tagName === 'TEXTAREA') {
+                    input.rows = 5; // Default rows for textarea
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

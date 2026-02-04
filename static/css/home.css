@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    /* Rich gradient background */
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    min-height: 100vh;
+    color: #f8fafc;
+}
+
+/* Glass Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+/* Glass Input */
+.form-control-glass {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+}
+
+.form-control-glass:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #8b5cf6 !important;
+    /* Violet accent */
+    box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25) !important;
+    color: #fff !important;
+}
+
+.form-control-glass::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Buttons */
+.btn-gradient {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+    color: white;
+}
+
+/* Links */
+.link-accent {
+    color: #8b5cf6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-accent:hover {
+    color: #a78bfa;
+    text-decoration: underline;
+}
+
+/* Gradient Text */
+.text-gradient {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f97316);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}

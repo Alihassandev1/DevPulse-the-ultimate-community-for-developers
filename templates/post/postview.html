@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }} - DevPulse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    {% include 'layout/nav.html' %}
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-xl-8">
+                <!-- Post Card -->
+                <div class="glass-card mb-5">
+
+                    <!-- Head: Title and Meta -->
+                    <div class="mb-4 text-center">
+                        <div class="d-flex justify-content-center align-items-center gap-3 text-light opacity-75">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center fw-bold text-gradient"
+                                    style="width: 32px; height: 32px; font-size: 0.9rem;">
+                                    {{ post.creator.username|slice:":1"|upper }}
+                                </div>
+                                <span class="fw-medium">{{ post.creator.username }}</span>
+                            </div>
+                            <span>&bull;</span>
+                            <span><i class="far fa-calendar-alt me-1"></i> {{ post.created_at|date:"F d, Y" }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="mb-4 rounded-3 overflow-hidden shadow-lg position-relative">
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid w-100"
+                            style="object-fit: cover; max-height: 500px;">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="post-content text-light lh-lg fs-5 px-md-3">
+                        {{ post.content|linebreaks }}
+                    </div>
+
+                    <!-- Footer / Back Button -->
+                    <div
+                        class="mt-5 pt-4 border-top border-white border-opacity-10 d-flex justify-content-between align-items-center">
+                        <a href="{% url 'post:posthome' %}" class="btn btn-outline-light rounded-pill px-4">
+                            <i class="fas fa-arrow-left me-2"></i> Back to Posts
+                        </a>
+                        <!-- Optional: Add share buttons or edit button if user is creator -->
+                        {% if request.user == post.creator %}
+                        <!-- Placeholder for future Edit functionality -->
+                        <!-- <a href="#" class="btn btn-sm btn-outline-info rounded-pill">Edit</a> -->
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'layout/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

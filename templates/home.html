@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Welcome to DevPulse {%endblock%}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    {%block head%}{%endblock%}
+</head>
+
+<body class="flex-column min-vh-100">
+    {% include 'layout/nav.html' %}
+
+    {%block content%}
+    <div class="container flex-grow-1 d-flex align-items-center justify-content-center my-5">
+        <div class="row w-100 align-items-center">
+
+            <!-- Hero Text -->
+            <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                <h1 class="display-3 fw-bold mb-4 text-gradient lh-sm">
+                    Connect. Share. <br> Grow Together.
+                </h1>
+                <p class="lead text-light opacity-75 mb-5 fs-4">
+                    DevPulse is the ultimate community for developers to share insights, tutorials, and experiences.
+                    Join the conversation today.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'post:posthome' %}" class="btn btn-gradient btn-lg px-5 shadow-lg">
+                        Go to Feed <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'user:signup' %}" class="btn btn-gradient btn-lg px-5 shadow-lg">
+                        Get Started
+                    </a>
+                    <a href="{% url 'user:login' %}" class="btn btn-outline-light btn-lg px-5">
+                        Log In
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Hero Visual/Features -->
+            <div class="col-lg-6">
+                <div class="glass-card p-4 position-relative z-1">
+                    <div class="d-flex align-items-center gap-3 mb-4 border-bottom border-light border-opacity-10 pb-3">
+                        <div class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center text-gradient fw-bold fs-4"
+                            style="width: 50px; height: 50px;">
+                            DP
+                        </div>
+                        <div>
+                            <h5 class="mb-0 text-white fw-bold">Trending Topics</h5>
+                            <small class="text-light opacity-50">What developers are talking about</small>
+                        </div>
+                    </div>
+
+                    <div class="vstack gap-3">
+                        <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.05);">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary bg-opacity-25 text-primary-emphasis">Python</span>
+                                <small class="text-light opacity-50">2m ago</small>
+                            </div>
+                            <p class="text-light mb-0 small">Mastering Django ORM optimizations for high-traffic apps.
+                            </p>
+                        </div>
+
+                        <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.05);">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success bg-opacity-25 text-success-emphasis">DevOps</span>
+                                <small class="text-light opacity-50">1h ago</small>
+                            </div>
+                            <p class="text-light mb-0 small">Automating deployment pipelines with GitHub Actions.</p>
+                        </div>
+
+                        <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.05);">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-warning bg-opacity-25 text-warning-emphasis">Frontend</span>
+                                <small class="text-light opacity-50">3h ago</small>
+                            </div>
+                            <p class="text-light mb-0 small">Glassmorphism: The trend that dominates 2024 UI design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decorative Elements -->
+                <div class="position-absolute bg-primary rounded-circle blur-3xl opacity-20 start-50 translate-middle-x"
+                    style="width: 300px; height: 300px; filter: blur(80px); z-index: -1;"></div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+
+    {%block footer%}
+    {% include 'layout/footer.html' %}
+    {%endblock%}
+
+    {%block js%}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {%endblock%}
+</body>
+
+</html>

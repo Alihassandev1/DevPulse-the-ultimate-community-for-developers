@@ -1,0 +1,60 @@
+<footer class="mt-auto py-5" id="contact"
+  style="background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+  <div class="container">
+    <div class="row gy-4 justify-content-between align-items-center">
+
+      <!-- Brand & Tagline -->
+      <div class="col-md-4 text-center text-md-start">
+        <a href="/" class="text-decoration-none mb-2 d-inline-block">
+          <span class="fs-4 fw-bold"
+            style="background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f97316); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">DevPulse</span>
+        </a>
+        <p class="text-light opacity-50 small mb-0">Empowering developers to share, learn, and grow together.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-4 text-center">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mx-2"><a href="{% url 'post:posthome' %}"
+              class="text-light text-decoration-none opacity-75 hover-opacity-100">Home</a></li>
+          <li class="list-inline-item mx-2"><a href="#"
+              class="text-light text-decoration-none opacity-75 hover-opacity-100">About</a></li>
+          <li class="list-inline-item mx-2"><a href="#"
+              class="text-light text-decoration-none opacity-75 hover-opacity-100">Privacy</a></li>
+        </ul>
+      </div>
+
+      <!-- Social / Contact -->
+      <div class="col-md-4 text-center text-md-end">
+        <p class="text-light opacity-75 mb-2 fw-medium">Connect with us</p>
+        <div class="d-flex justify-content-center justify-content-md-end gap-3">
+          <a href="https://twitter.com/Ali_Hassan_real"
+            class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+            style="width: 36px; height: 36px;"><i class="fab fa-twitter"></i></a>
+          <a href="https://github.com/alihassandev1"
+            class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+            style="width: 36px; height: 36px;"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/alihassanmg1/"
+            class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+            style="width: 36px; height: 36px;"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"
+            class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center"
+            style="width: 36px; height: 36px;"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4 border-white opacity-10">
+
+    <div class="text-center text-light opacity-50 small">
+      <p class="mb-0">&copy; {% now "Y" %} DevPulse. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .hover-opacity-100:hover {
+    opacity: 1 !important;
+    text-decoration: underline !important;
+  }
+</style>

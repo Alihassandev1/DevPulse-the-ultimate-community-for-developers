@@ -1,0 +1,42 @@
+<nav class="container navbar navbar-expand-lg shadow-sm sticky-top px-2 my-3"
+  style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2);">
+
+  <!-- Logo (Left) -->
+  <a class="navbar-brand fw-bold" href="/">
+    <img src="/static/logo/image.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+    <span
+      style="background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f97316); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">DevPulse</span>
+  </a>
+
+  <!-- Mobile Toggle -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar Content -->
+  <div class="collapse navbar-collapse" id="mainNavbar">
+
+    <!-- Center Links -->
+    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'post:posthome' %}">Posts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contact">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right Buttons -->
+    <div class="d-flex">
+      {% if request.user.is_authenticated %}
+      <a class="btn btn-login btn-outline-primary" href="{% url 'post:profile' request.user.username %}">{{ request.user.username|slice:":1"|upper }}</a>
+      <a href="{% url 'user:logout' %}" class="btn btn-logout"><i class="fas fa-sign-out-alt"></i></a>
+      {% else %}
+      <a href="{% url 'user:login' %}" class="btn me-2 fas fa-sign-in-alt"></a>
+      <a href="{% url 'user:signup' %}" class="btn fas fa-user-plus"></a>
+      {% endif %}
+    </div>
+
+  </div>
+</nav>
