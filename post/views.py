@@ -29,12 +29,6 @@ def postView(request, id):
     post = Post.objects.get(id=id)
     return render(request, 'post/postview.html', {'post': post})
 
-def dashboard(request):
-    user = request.user
-    user_posts = Post.objects.filter(creator=user)
-    recent_posts = Post.objects.filter(creator=user).order_by('-created_at')[:5]
-    return render(request, 'post/dashboard.html', {'user_posts': user_posts, 'recent_posts': recent_posts})
-
 def profile(request, username):
     profile = get_user_model().objects.get(username=username)
     post = Post.objects.filter(creator=profile)

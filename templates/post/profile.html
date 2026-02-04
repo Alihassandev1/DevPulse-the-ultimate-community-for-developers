@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - DevPulse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    {% include 'layout/nav.html' %}
+
+    <div class="container my-5">
+        <!-- Welcome Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-sm glass-card border-0 text-white">
+                    <div class="card-body p-4">
+                        <h1 class="display-4 fw-bold mb-2">
+                            <span class="text-gradient">
+                                Welcome, {{ profile.first_name }}!
+                            </span>
+                        </h1>
+                        <p class="lead opacity-75">Here's your personalized dashboard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="row mb-4 g-3">
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 glass-card border-0 text-white transition-hover">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-alt fa-3x mb-3 text-gradient"></i>
+                        <h3 class="fw-bold">{{ post.count }}</h3>
+                        <p class="opacity-75 mb-0">Your Posts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 glass-card border-0 text-white transition-hover">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock fa-3x mb-3 text-gradient"></i>
+                        <h3 class="fw-bold">{{ recent_posts.count }}</h3>
+                        <p class="opacity-75 mb-0">Recent Posts</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 glass-card border-0 text-white transition-hover">
+                    <div class="card-body text-center">
+                        <i class="fas fa-calendar fa-3x mb-3 text-gradient"></i>
+                        <h3 class="fw-bold">{{ profile.date_joined|date:"M Y" }}</h3>
+                        <p class="opacity-75 mb-0">Member Since</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        {% if user.is_authenticated and user == profile %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="fw-bold mb-3 text-white">Quick Actions</h2>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="{% url 'post:newpost' %}" class="btn btn-gradient btn-lg rounded-pill px-4">
+                        <i class="fas fa-plus me-2"></i>Create New Post
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Your Recent Posts -->
+        <div class="row">
+            <div class="col-12">
+                <h2 class="fw-bold mb-3 text-white">Recent Posts</h2>
+                {% if post %}
+                <div class="row g-4">
+                    {% for post in post %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div
+                            class="card h-100 glass-card border-0 text-white shadow-sm overflow-hidden transition-hover">
+
+                            <div class="card-header border-0 bg-transparent px-2 pt-2 d-flex align-items-center gap-2">
+                                <div class="rounded-pill primary bg-opacity-1 d-flex align-items-center justify-content-center fw-bold text-gradient"
+                                    style="width: 32px; height: 32px; font-size: 1rem;">
+                                    {{ post.creator.username|slice:":1"|upper }}
+                                </div>
+                                <small class="m-0 fw-medium opacity-75">{{ post.creator.username }}</small>
+                            </div>
+
+                            {% if post.image %}
+                            <div class="position-relative px-2">
+                                <img src="{{ post.image.url }}" class="card-img-top rounded-3 shadow-sm"
+                                    alt="{{ post.title }}" style="height: 180px; object-fit: cover;">
+                            </div>
+                            {% endif %}
+
+                            <div class="card-body d-flex flex-column pt-3">
+                                <p class="card-text text-truncate">{{ post.content|slice:":100" }}</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <a href="{% url 'post:postView' post.id %}"
+                                        class="btn btn-sm btn-gradient px-3 rounded-pill">View Post</a>
+                                    <small class="text-light opacity-50" style="font-size: 0.75rem;">{{
+                                        post.created_at.date }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="card shadow-sm glass-card border-0 text-white">
+                    <div class="card-body text-center py-5">
+                        <i class="fas fa-inbox fa-3x opacity-50 mb-3"></i>
+                        <h3 class="fw-bold">No posts yet</h3>
+                        <p class="opacity-75 mb-3">Start sharing your thoughts with the world!</p>
+                        <a href="{% url 'post:newpost' %}" class="btn btn-gradient px-4 rounded-pill">
+                            <i class="fas fa-plus me-2"></i>Create Your First Post
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'layout/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
