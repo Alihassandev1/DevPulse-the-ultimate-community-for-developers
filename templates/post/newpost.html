@@ -29,8 +29,7 @@
 
                         {% for field in form %}
                         <div class="mb-4">
-                            <label for="{{ field.id_for_label }}" class="form-label text-light fw-medium">{{ field.label
-                                }}</label>
+                            <label for="{{ field.id_for_label }}" class="form-label text-light fw-medium">{{ field.label }}</label>
                             {{ field }}
                             {% if field.help_text %}
                             <div class="form-text text-light opacity-50">{{ field.help_text }}</div>

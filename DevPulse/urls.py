@@ -19,8 +19,10 @@ from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler404
+from .views import custom_404
 
-app_name = "devpulse"
+app_name = "DevPulse"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,3 +33,4 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'DevPulse.views.custom_404'
