@@ -7,11 +7,8 @@ from django.contrib.auth import get_user_model
 # Create your views here.
 
 def posthome(request):
-    if request.user.is_authenticated:
-        post = Post.objects.all().order_by('-created_at')
-        return render(request, 'post/posthome.html', {'post': post})
-    else:
-        return redirect('user:login')
+    post = Post.objects.all().order_by('-created_at')
+    return render(request, 'post/posthome.html', {'post': post})
 
 @login_required(login_url='user:login')
 def newPost(request):

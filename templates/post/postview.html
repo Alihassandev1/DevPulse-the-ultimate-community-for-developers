@@ -24,15 +24,13 @@
                     <!-- Head: Title and Meta -->
                     <div class="mb-4 text-center">
                         <div class="d-flex justify-content-center align-items-center gap-3 text-light opacity-75">
-                            <div class="d-flex align-items-center gap-2">
+                            <a class="d-flex align-items-center gap-2 link-light text-decoration-none" href="{% url 'post:profile' post.creator.username %}">
                                 <div class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center fw-bold text-gradient"
                                     style="width: 32px; height: 32px; font-size: 0.9rem;">
                                     {{ post.creator.username|slice:":1"|upper }}
                                 </div>
-                                <span class="fw-medium">{{ post.creator.username }}</span>
-                            </div>
-                            <span>&bull;</span>
-                            <span><i class="far fa-calendar-alt me-1"></i> {{ post.created_at|date:"F d, Y" }}</span>
+                                <span class="fw-medium link-light text-decoration-none">{{ post.creator.username }}</span>
+                            </a>
                         </div>
                     </div>
 
@@ -48,15 +46,12 @@
                     </div>
 
                     <!-- Footer / Back Button -->
-                    <div
-                        class="mt-5 pt-4 border-top border-white border-opacity-10 d-flex justify-content-between align-items-center">
+                    <div class="mt-5 pt-4 border-top border-white border-opacity-10 d-flex justify-content-between align-items-center">
                         <a href="{% url 'post:posthome' %}" class="btn btn-outline-light rounded-pill px-4">
                             <i class="fas fa-arrow-left me-2"></i> Back to Posts
                         </a>
-                        <!-- Optional: Add share buttons or edit button if user is creator -->
+                            <span class="opacity-50"><i class="far fa-calendar-alt me-1 opacity-50"></i> {{ post.created_at|date:"F d, Y" }}</span>
                         {% if request.user == post.creator %}
-                        <!-- Placeholder for future Edit functionality -->
-                        <!-- <a href="#" class="btn btn-sm btn-outline-info rounded-pill">Edit</a> -->
                         {% endif %}
                     </div>
 
