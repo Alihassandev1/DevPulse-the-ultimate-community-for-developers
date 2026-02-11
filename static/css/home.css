@@ -81,3 +81,562 @@ body {
     -webkit-text-fill-color: transparent;
     font-weight: bold;
 }
+
+/* ==================== Post Content Styling ==================== */
+/* Styles for displaying CKEditor content on post view pages */
+
+.post-content {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(248, 250, 252, 0.9);
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    color: #f8fafc;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+}
+
+.post-content h1 {
+    font-size: 2em;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.post-content h2 {
+    font-size: 1.5em;
+    color: #e2e8f0;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+    padding-bottom: 0.3em;
+}
+
+.post-content h3 {
+    font-size: 1.25em;
+    color: #cbd5e1;
+}
+
+.post-content p {
+    margin-bottom: 1em;
+}
+
+.post-content a {
+    color: #8b5cf6;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.post-content a:hover {
+    color: #a78bfa;
+    text-decoration: underline;
+}
+
+.post-content strong,
+.post-content b {
+    color: #fff;
+    font-weight: 600;
+}
+
+.post-content em,
+.post-content i {
+    color: #e2e8f0;
+}
+
+/* Lists */
+.post-content ul,
+.post-content ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+}
+
+.post-content li {
+    margin-bottom: 0.5em;
+}
+
+.post-content ul li::marker {
+    color: #8b5cf6;
+}
+
+.post-content ol li::marker {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+/* Blockquote */
+.post-content blockquote {
+    border-left: 4px solid #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-radius: 0 12px 12px 0;
+    color: #e2e8f0;
+    font-style: italic;
+}
+
+/* Code - Inline */
+.post-content code {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a5f3fc;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+}
+
+/* Code - Block */
+.post-content pre {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.25em 1.5em;
+    margin: 1.5em 0;
+    overflow-x: auto;
+}
+
+.post-content pre code {
+    background: transparent;
+    padding: 0;
+    color: #a5f3fc;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Tables */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-content th,
+.post-content td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.post-content th {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    color: #fff;
+    font-weight: 600;
+}
+
+.post-content td {
+    color: rgba(248, 250, 252, 0.85);
+}
+
+.post-content tr:hover td {
+    background: rgba(139, 92, 246, 0.05);
+}
+
+/* Horizontal Rule */
+.post-content hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+    margin: 2em 0;
+}
+
+/* Images */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    margin: 1em 0;
+}
+
+/* Figure and Captions */
+.post-content figure {
+    margin: 1.5em 0;
+    text-align: center;
+}
+
+.post-content figcaption {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+
+
+/* ==================== CKEditor Glassy Theme ==================== */
+
+/* CKEditor Container */
+.django-ckeditor-widget {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.django-ckeditor-widget:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 8px 40px rgba(139, 92, 246, 0.15);
+}
+
+.django-ckeditor-widget:focus-within {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25), 0 8px 40px rgba(139, 92, 246, 0.2);
+}
+
+/* CKEditor Main Container */
+.cke {
+    border: none !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+/* CKEditor Top Bar (Toolbar Container) */
+.cke_top {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95)) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 8px 12px !important;
+}
+
+/* Toolbar */
+.cke_toolbar {
+    margin-bottom: 4px;
+}
+
+/* Toolbar Buttons */
+.cke_button {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 6px !important;
+    margin: 2px !important;
+    padding: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+.cke_button:hover {
+    background: rgba(139, 92, 246, 0.2) !important;
+    border-color: rgba(139, 92, 246, 0.4) !important;
+    transform: translateY(-1px);
+}
+
+.cke_button:active,
+.cke_button.cke_button_on {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3)) !important;
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.3) !important;
+}
+
+/* Button Icons */
+.cke_button_icon {
+    filter: invert(1) brightness(0.9);
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+}
+
+.cke_button:hover .cke_button_icon {
+    opacity: 1;
+}
+
+/* Button Labels */
+.cke_button_label {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 11px !important;
+}
+
+/* Toolbar Separator */
+.cke_toolbar_separator {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    margin: 4px 8px !important;
+}
+
+/* Combo Buttons (Dropdowns) */
+.cke_combo_button {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+.cke_combo_button:hover {
+    background: rgba(139, 92, 246, 0.15) !important;
+    border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+.cke_combo_text {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.cke_combo_arrow {
+    border-top-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Content Area (where you type) */
+.cke_contents {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border: none !important;
+}
+
+/* The actual editable iframe content */
+.cke_wysiwyg_frame,
+.cke_wysiwyg_div {
+    background: transparent !important;
+}
+
+/* Bottom Bar */
+.cke_bottom {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.95)) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 6px 12px !important;
+}
+
+/* Resize Handle */
+.cke_resizer {
+    border-color: transparent rgba(139, 92, 246, 0.5) transparent transparent !important;
+}
+
+/* Path (Element Path at bottom) */
+.cke_path {
+    margin: 0 !important;
+}
+
+.cke_path_item {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 11px !important;
+    transition: color 0.2s ease;
+}
+
+.cke_path_item:hover {
+    color: #8b5cf6 !important;
+}
+
+/* Word Count */
+.cke_wordcount {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 11px !important;
+}
+
+/* Dialog Styling */
+.cke_dialog {
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.cke_dialog_body {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+}
+
+.cke_dialog_title {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2)) !important;
+    color: #fff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    font-weight: 600 !important;
+}
+
+.cke_dialog_contents_body {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.cke_dialog_ui_input_text,
+.cke_dialog_ui_input_textarea {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    padding: 10px 12px !important;
+    transition: all 0.2s ease;
+}
+
+.cke_dialog_ui_input_text:focus,
+.cke_dialog_ui_input_textarea:focus {
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+    outline: none !important;
+}
+
+.cke_dialog_footer {
+    background: rgba(15, 23, 42, 0.5) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.cke_dialog_ui_button {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
+    transition: all 0.2s ease !important;
+}
+
+.cke_dialog_ui_button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4) !important;
+}
+
+/* Panel/Dropdown Menus */
+.cke_panel {
+    background: rgba(30, 41, 59, 0.98) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+    overflow: hidden;
+}
+
+.cke_menu_panel {
+    background: transparent !important;
+}
+
+.cke_menuitem {
+    transition: background 0.15s ease;
+}
+
+.cke_menuitem a:hover {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2)) !important;
+}
+
+.cke_menuitem span {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Color Picker */
+.cke_colorbox {
+    border-radius: 4px !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cke_colorbox:hover {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar in CKEditor */
+.cke_contents::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cke_contents::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.cke_contents::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    border-radius: 4px;
+}
+
+.cke_contents::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #8b5cf6, #a78bfa);
+}
+
+/* Source mode styling */
+.cke_source {
+    background: rgba(15, 23, 42, 0.95) !important;
+    color: #a5f3fc !important;
+    font-family: 'Fira Code', 'Consolas', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    padding: 16px !important;
+}
+
+/* Notifications */
+.cke_notification {
+    background: rgba(30, 41, 59, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.cke_notification_success {
+    border-left: 4px solid #22c55e !important;
+}
+
+.cke_notification_warning {
+    border-left: 4px solid #f97316 !important;
+}
+
+.cke_notification_info {
+    border-left: 4px solid #3b82f6 !important;
+}
+
+/* Loading Animation */
+.cke_loader {
+    border-color: rgba(139, 92, 246, 0.2) !important;
+    border-top-color: #8b5cf6 !important;
+}
+
+.upload-zone {
+    position: relative;
+    border: 2px dashed rgba(255,255,255,0.25);
+    border-radius: 18px;
+    padding: 50px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: rgba(255,255,255,0.03);
+}
+
+.upload-zone:hover {
+    border-color: #7c5cff;
+    background: rgba(124,92,255,0.08);
+    transform: translateY(-2px);
+}
+
+.upload-zone.drag-over {
+    border-color: #7c5cff;
+    background: rgba(124,92,255,0.12);
+    box-shadow: 0 0 25px rgba(124,92,255,0.25);
+}
+
+.upload-input {
+    display: none;
+}
+
+.upload-placeholder i {
+    font-size: 48px;
+    color: #aaa;
+}
+
+.upload-preview {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-preview img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 12px;
+}
+
+.remove-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

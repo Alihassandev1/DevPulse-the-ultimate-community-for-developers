@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 
@@ -24,7 +25,8 @@
                     <!-- Head: Title and Meta -->
                     <div class="mb-4 text-center">
                         <div class="d-flex justify-content-center align-items-center gap-3 text-light opacity-75">
-                            <a class="d-flex align-items-center gap-2 link-light text-decoration-none" href="{% url 'post:profile' post.creator.username %}">
+                            <a class="d-flex align-items-center gap-2 link-light text-decoration-none"
+                                href="{% url 'post:profile' post.creator.username %}">
                                 <div class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center fw-bold text-gradient"
                                     style="width: 32px; height: 32px; font-size: 0.9rem;">
                                     {{ post.creator.username|slice:":1"|upper }}
@@ -41,16 +43,17 @@
                     </div>
 
                     <!-- Content -->
-                    <div class="post-content text-light lh-lg fs-5 px-md-3">
-                        {{ post.content|linebreaks }}
+                    <div class="post-content text-light lh-lg px-md-3">
+                        {{ post.content|safe }}
                     </div>
 
                     <!-- Footer / Back Button -->
-                    <div class="mt-5 pt-4 border-top border-white border-opacity-10 d-flex justify-content-between align-items-center">
+                    <div
+                        class="mt-5 pt-4 border-top border-white border-opacity-10 d-flex justify-content-between align-items-center">
                         <a href="{% url 'post:posthome' %}" class="btn btn-outline-light rounded-pill px-4">
                             <i class="fas fa-arrow-left me-2"></i> Back to Posts
                         </a>
-                            <span class="opacity-50"><i class="far fa-calendar-alt me-1 opacity-50"></i> {{ post.created_at|date:"F d, Y" }}</span>
+                        <span class="opacity-50"><i class="far fa-calendar-alt me-1 opacity-50"></i> {{ post.created_at|date:"F d, Y" }}</span>
                         {% if request.user == post.creator %}
                         {% endif %}
                     </div>
@@ -63,6 +66,21 @@
     {% include 'layout/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find all code blocks inside post-content (CKEditor outputs <pre><code class="language-xxx">)
+            document.querySelectorAll('.post-content pre code').forEach(function (block) {
+                hljs.highlightElement(block);
+            });
+            // Also catch any standalone <pre> without <code> wrapper
+            document.querySelectorAll('.post-content pre').forEach(function (block) {
+                if (!block.querySelector('code')) {
+                    hljs.highlightElement(block);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

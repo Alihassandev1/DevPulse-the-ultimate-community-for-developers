@@ -1,0 +1,190 @@
+/* CKEditor Content Area Styling - Inside the iframe */
+body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%) !important;
+    color: #f8fafc !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 20px 24px !important;
+    margin: 0;
+}
+
+/* Selection Color */
+::selection {
+    background: rgba(139, 92, 246, 0.4);
+    color: #fff;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #f8fafc;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2em;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #e2e8f0;
+}
+
+h3 {
+    font-size: 1.25em;
+    color: #cbd5e1;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1em;
+    color: rgba(248, 250, 252, 0.9);
+}
+
+/* Links */
+a {
+    color: #8b5cf6;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #a78bfa;
+    text-decoration: underline;
+}
+
+/* Bold and Italic */
+strong,
+b {
+    color: #fff;
+    font-weight: 600;
+}
+
+em,
+i {
+    color: #e2e8f0;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+    color: rgba(248, 250, 252, 0.9);
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+ul li::marker {
+    color: #8b5cf6;
+}
+
+ol li::marker {
+    color: #3b82f6;
+}
+
+/* Blockquote */
+blockquote {
+    border-left: 4px solid linear-gradient(180deg, #3b82f6, #8b5cf6);
+    border-left: 4px solid #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-radius: 0 8px 8px 0;
+    color: #e2e8f0;
+    font-style: italic;
+}
+
+/* Code - Inline */
+code {
+    background: rgba(139, 92, 246, 0.15);
+    color: #a5f3fc;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+}
+
+/* Code - Block */
+pre {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1em 1.5em;
+    margin: 1.5em 0;
+    overflow-x: auto;
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    color: #a5f3fc;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+th {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    color: #fff;
+    font-weight: 600;
+}
+
+td {
+    color: rgba(248, 250, 252, 0.85);
+}
+
+tr:hover td {
+    background: rgba(139, 92, 246, 0.05);
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+    margin: 2em 0;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    margin: 1em 0;
+}
+
+/* Placeholder text */
+.cke_editable.cke_editable_placeholder::before {
+    color: rgba(255, 255, 255, 0.4);
+}

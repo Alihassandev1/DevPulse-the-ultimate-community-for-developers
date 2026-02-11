@@ -29,7 +29,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('u/', include('user.urls')),
     path('p/', include('post.urls')),
-    # path('<str:username>/', views.profile, name='profile'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'ckeditor_uploader',
     'post',
     'user',
 ]
@@ -149,3 +151,26 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+CKEDITOR_UPLOAD_PATH = 'ckeditor/'
+
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 300,
+        'width': 'auto',
+        'toolbar': [
+            ['Bold', 'Italic', 'Link', 'Blockquote'],
+            ['NumberedList', 'BulletedList'],
+            ['CodeSnippet'],
+        ],
+        'extraPlugins': 'codesnippet,widget',
+        'removeButtons': 'Underline,Strike,Subscript,Superscript',
+        'codeSnippet_theme': 'monokai_sublime',
+        'contentsCss': '/static/css/ckeditor-content.css',
+    }
+}
+    
