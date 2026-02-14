@@ -10,7 +10,7 @@ def post_id_creation():
 class Post(models.Model):
     id = models.CharField(max_length=12, primary_key=True, editable=False, default=post_id_creation)
     content = RichTextUploadingField(blank=True, null=True)
-    image = models.ImageField(upload_to=f'post_images/')
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)

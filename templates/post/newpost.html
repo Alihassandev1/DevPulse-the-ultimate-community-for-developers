@@ -9,8 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post.css' %}">
     {{ form.media }}
 </head>
 
@@ -19,33 +19,73 @@
 
     <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-xl-7">
-                <div class="glass-card">
-                    <div class="text-center mb-4">
-                        <h2 class="text-gradient">Create a New Post</h2>
-                        <p class="text-light opacity-75">Share your thoughts with the community</p>
-                    </div>
-
-                    <form action="" method="post" enctype="multipart/form-data">
+            <div class="col-lg-7">
+                <div class="compose-container">
+                    <form id="postForm" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-
-                        {% for field in form %}
-                        <div class="mb-4">
-                            {{ field }}
-                            {% if field.help_text %}
-                            <div class="form-text text-light opacity-50">{{ field.help_text }}</div>
-                            {% endif %}
-                            {% if field.errors %}
-                            <div class="text-danger small mt-1">
-                                {{ field.errors.0 }}
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger mb-3">
+                                {{ form.non_field_errors }}
                             </div>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
+                        {% endif %}
 
-                        <div class="d-flex justify-content-end gap-3 mt-4">
-                            <a href="{% url 'post:posthome' %}" class="btn btn-outline-light px-4">Cancel</a>
-                            <button type="submit" class="btn btn-gradient px-4">Publish Post</button>
+                        <!-- Header with User Avatar -->
+                        <div class="compose-header">
+                            <div class="user-avatar">
+                                {% if user.profile_data.img %}
+                                    <img src="{{ user.profile_data.img.url }}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                                {% else %}
+                                    {{ user.first_name|slice:":1"|upper|default:user.username|slice:":1"|upper }}
+                                {% endif %}
+                            </div>
+                            <div class="compose-form">
+                                <div style="font-size: 12px; margin-bottom: 4px;">
+                                    <a href="{% url 'post:profile' request.user.username %}" class="btn btn-login" style="color: rgb(176, 209, 209);">{{ user.username }}</a>
+                                </div>
+                                
+                                <!-- CKEditor Content Field -->
+                                {{ form.content }}
+                                {% if form.content.errors %}
+                                    <div class="text-danger small mt-1">{{ form.content.errors }}</div>
+                                {% endif %}
+
+                                <!-- Image Preview -->
+                                <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                                    <img id="imagePreview" src="" alt="Selected image" class="image-preview">
+                                    <button type="button" class="remove-image-btn" onclick="removeImage()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Image Input -->
+                                <div class="file-input-wrapper">
+                                    {{ form.image }}
+                                </div>
+                                {% if form.image.errors %}
+                                    <div class="text-danger small mt-1">{{ form.image.errors }}</div>
+                                {% endif %}
+
+                                <!-- Divider -->
+                                <div class="compose-divider"></div>
+
+                                <!-- Action Buttons -->
+                                <div class="compose-actions">
+                                    <button type="button" class="compose-action-btn" title="Add Image" onclick="document.getElementById('id_image').click()">
+                                        <i class="fas fa-image"></i>
+                                    </button>
+                                    <button type="button" class="compose-action-btn" title="Add Emoji" onclick="alert('Emoji picker coming soon!')">
+                                        <i class="fas fa-face-smile"></i>
+                                    </button>
+                                    <button type="button" class="compose-action-btn" title="Schedule" onclick="alert('Schedule feature coming soon!')">
+                                        <i class="fas fa-clock"></i>
+                                    </button>
+
+                                    <!-- Publish Button (Right Aligned) -->
+                                    <button type="submit" class="btn-publish ms-auto" id="publishBtn">
+                                        Post
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -56,22 +96,68 @@
     {% include 'layout/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var inputs = document.querySelectorAll('input, textarea, select');
-            inputs.forEach(function (input) {
-                input.classList.add('form-control', 'form-control-glass');
-                if (input.type === 'file') {
-                    input.classList.add('p-2'); // Add padding for file input for better look
+        function getEditorContent() {
+            if (window.CKEDITOR && CKEDITOR.instances.id_content) {
+                return CKEDITOR.instances.id_content.getData().replace(/<[^>]*>/g, '').trim();
+            }
+            const textarea = document.querySelector('textarea[name="content"]');
+            return textarea ? textarea.value.trim() : '';
+        }
+
+        // Handle image preview
+        const imageInput = document.getElementById('id_image');
+        if (imageInput) {
+            imageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        document.getElementById('imagePreview').src = event.target.result;
+                        document.getElementById('imagePreviewContainer').style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
                 }
-                if (input.tagName === 'TEXTAREA') {
-                    input.rows = 5; // Default rows for textarea
-                }
+                updatePublishButton();
             });
+        }
+
+        // Remove image
+        function removeImage() {
+            document.getElementById('id_image').value = '';
+            document.getElementById('imagePreviewContainer').style.display = 'none';
+            updatePublishButton();
+        }
+
+        // Disable publish button if both content and image are empty
+        const publishBtn = document.getElementById('publishBtn');
+
+        function updatePublishButton() {
+            const hasContent = getEditorContent().length > 0;
+            const hasImage = imageInput && imageInput.files.length > 0;
+            publishBtn.disabled = !(hasContent || hasImage);
+        }
+
+        const contentField = document.querySelector('textarea[name="content"]');
+        if (window.CKEDITOR && CKEDITOR.instances.id_content) {
+            CKEDITOR.instances.id_content.on('change', updatePublishButton);
+            CKEDITOR.instances.id_content.on('instanceReady', updatePublishButton);
+        } else if (contentField) {
+            contentField.addEventListener('input', updatePublishButton);
+        }
+        updatePublishButton();
+
+        // Form submission
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            const hasContent = getEditorContent().length > 0;
+            const hasImage = imageInput && imageInput.files.length > 0;
+            if (!(hasContent || hasImage)) {
+                e.preventDefault();
+                alert('Please add text or an image before posting.');
+            }
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </body>
 
 </html>

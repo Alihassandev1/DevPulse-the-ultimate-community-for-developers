@@ -640,3 +640,313 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;  /* Makes it circular */
+    object-fit: cover;   /* Crops to fill the circle */
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Avatar Styles */
+.profile-avatar-container {
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(139, 92, 246, 0.5);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.profile-avatar:hover {
+    border-color: rgba(139, 92, 246, 1);
+    box-shadow: 0 12px 32px rgba(139, 92, 246, 0.5);
+    transform: scale(1.05);
+}
+
+.profile-avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid rgba(139, 92, 246, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: rgba(139, 92, 246, 0.1);
+    color: rgba(139, 92, 246, 0.7);
+}
+
+/* Profile Edit Button */
+.profile-edit-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6) !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.profile-edit-btn:hover {
+    background: linear-gradient(90deg, #2563eb, #7c3aed) !important;
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+/* Crop Modal Styles */
+.crop-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.crop-container img {
+    max-height: 100%;
+    max-width: 100%;
+    cursor: grab;
+    transition: transform 0.1s ease;
+}
+
+.crop-container img:active {
+    cursor: grabbing;
+}
+
+.preview-container {
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.form-range {
+    background: linear-gradient(to right, rgba(139, 92, 246, 0.3), rgba(139, 92, 246, 0.8));
+    height: 6px;
+    border-radius: 3px;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+.form-range::-moz-range-thumb {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+/* ==================== CKEditor Styling ==================== */
+
+/* CKEditor Container */
+.ck.ck-editor__main {
+    display: block;
+}
+
+.ck.ck-editor__editable {
+    background: transparent;
+    border: none;
+    color: #f8fafc;
+    min-height: 100px;
+    border-radius: 0;
+    padding: 8px 0;
+}
+
+.ck.ck-editor__editable:focus {
+    outline: none;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.5);
+}
+
+/* CKEditor Toolbar */
+.ck.ck-toolbar {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px 8px 0 0;
+    padding: 8px 4px;
+}
+
+.ck.ck-toolbar__items {
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.ck.ck-toolbar__separator {
+    background: rgba(255, 255, 255, 0.1);
+    margin: 4px 2px;
+}
+
+/* CKEditor Button */
+.ck.ck-button {
+    color: #cbd5e1;
+    border: transparent;
+    padding: 6px 10px;
+}
+
+.ck.ck-button:hover:not(.ck-disabled) {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.ck.ck-button.ck-on {
+    background: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+.ck.ck-button:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* CKEditor Dropdown Menu */
+.ck.ck-dropdown__panel {
+    background: rgba(30, 41, 59, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.ck.ck-list {
+    padding: 4px 0;
+}
+
+.ck.ck-list__item {
+    color: #cbd5e1;
+    padding: 8px 16px;
+}
+
+.ck.ck-list__item:hover {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
+.ck.ck-list__item.ck-on {
+    background: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+/* CKEditor Input/Select */
+.ck.ck-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+.ck.ck-input:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+}
+
+.ck.ck-select {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #f8fafc !important;
+    padding: 6px 8px;
+}
+
+/* CKEditor Balloon Toolbar */
+.ck.ck-balloon-panel {
+    background: rgba(30, 41, 59, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* CKEditor Link */
+.ck.ck-link_selected {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+/* CKEditor Content Styles */
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4,
+.ck-content h5,
+.ck-content h6 {
+    color: #f8fafc;
+    font-weight: 600;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.ck-content p {
+    color: #f8fafc;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.ck-content blockquote {
+    border-left: 4px solid #3b82f6;
+    padding-left: 12px;
+    color: rgba(248, 250, 252, 0.8);
+    margin-left: 0;
+}
+
+.ck-content code {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fbbf24;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Courier New', monospace;
+}
+
+.ck-content pre {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    color: #f8fafc;
+    overflow-x: auto;
+}
+
+.ck-content a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.ck-content a:hover {
+    text-decoration: underline;
+}
+
+.ck-content hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ck-content ul,
+.ck-content ol {
+    color: #f8fafc;
+    margin-left: 16px;
+    margin-bottom: 8px;
+}
+
+.ck-content li {
+    margin-bottom: 4px;
+}

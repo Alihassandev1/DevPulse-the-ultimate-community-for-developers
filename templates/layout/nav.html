@@ -26,12 +26,19 @@
         <a class="nav-link" href="#contact">Contact</a>
       </li>
     </ul>
-
     <!-- Right Buttons -->
     <div class="d-flex">
       {% if request.user.is_authenticated %}
-      <a class="btn btn-login btn-outline-primary" href="{% url 'post:profile' request.user.username %}">{{ request.user.username|slice:":1"|upper }}</a>
-      <a href="{% url 'user:logout' %}" class="btn btn-logout"><i class="fas fa-sign-out-alt"></i></a>
+        {% if request.user.profile_data.img %}
+          <a href="{% url 'post:profile' request.user.username %}">
+            <img src="{{ user.profile_data.img.url }}" alt="Profile"
+             style="object-fit: cover; width: 2.5rem;" 
+             class="rounded-pill nav-link navbar-brand">
+          </a>
+        {% else %}
+            <a class="btn btn-login btn-outline-primary" href="{% url 'post:profile' request.user.username %}">{{ request.user.username|slice:":1"|upper }}</a>
+        {% endif %}
+      <a href="{% url 'user:logout' %}" class="btn btn-logout pt-2"><i class="fas fa-sign-out-alt"></i></a>
       {% else %}
       <a href="{% url 'user:login' %}" class="btn me-2 fas fa-sign-in-alt"></a>
       <a href="{% url 'user:signup' %}" class="btn fas fa-user-plus"></a>
