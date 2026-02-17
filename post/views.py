@@ -1,19 +1,35 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.db.models import Q
 from . import forms
 from .models import Post
 from django.contrib.auth import get_user_model
 # Create your views here.
 
 def posthome(request):
-    post = Post.objects.all().order_by('-created_at')
-    return render(request, 'post/posthome.html', {'post': post})
+    query = request.GET.get('q', '').strip()
+    post = Post.objects.all()
+    userProfile = None
+    
+    if query:
+        # Find all users matching the query
+        userProfile = get_user_model().objects.filter(username__icontains=query)
+        
+        if userProfile.exists():
+            # If username matches found, show posts by those users
+            post = post.filter(creator__in=userProfile)
+        else:
+            # If no username match, search by content
+            post = post.filter(Q(content__icontains=query))
+    
+    post = post.order_by('-created_at')
+    return render(request, 'post/posthome.html', {'post': post, 'search_query': query, 'showSearch' : False, 'userProfile': userProfile})
 
 @login_required
 def newPost(request):
     form = forms.CreatePost()
-    if request.method == 'POST':    
+    if request.method == 'POST':
         form = forms.CreatePost(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)

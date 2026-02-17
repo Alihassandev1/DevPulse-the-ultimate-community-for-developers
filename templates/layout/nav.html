@@ -26,6 +26,18 @@
         <a class="nav-link" href="#contact">Contact</a>
       </li>
     </ul>
+    {% if showSearch == False %}
+    <form class="d-flex me-2" role="search" method="get" action="">
+      <div class="search-box d-flex ">
+        <input
+        class="form-control form-control-sm rounded-pill border-0" style="padding-left: 4rem; background-color: #3c5174;"
+        type="search" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Search posts" aria-label="Search posts">
+      <button class="btn btn-sm ms-2" type="submit">
+        <i class="fas fa-search"></i></button>
+      </div>
+      
+    </form>
+    {% endif %}
     <!-- Right Buttons -->
     <div class="d-flex">
       {% if request.user.is_authenticated %}
@@ -36,7 +48,8 @@
              class="rounded-pill nav-link navbar-brand">
           </a>
         {% else %}
-            <a class="btn btn-login btn-outline-primary" href="{% url 'post:profile' request.user.username %}">{{ request.user.username|slice:":1"|upper }}</a>
+            <a class="btn btn-login rounded-pill" href="{% url 'post:profile' request.user.username %}" style="color: #7152c6; border-color: #7152c6;"> 
+              <i class="fas fa-user"></i></a>
         {% endif %}
       <a href="{% url 'user:logout' %}" class="btn btn-logout pt-2"><i class="fas fa-sign-out-alt"></i></a>
       {% else %}

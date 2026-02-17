@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from post.models import Post
 
 app_name = "devpulse"
 
 def home(request):
+    # if request.user.is_authenticated:
+    #     return redirect('post:posthome')
     return render(request, "home.html")
 
 def custom_404(request, exception):

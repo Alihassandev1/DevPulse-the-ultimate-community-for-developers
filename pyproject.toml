@@ -10,4 +10,5 @@ dependencies = [
     "Pillow",
     "django-allauth",
     "django-ckeditor-5",
+    "pgvector",
 ]
