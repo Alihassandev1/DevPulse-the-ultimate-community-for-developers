@@ -5,6 +5,7 @@ from django.db.models import Q
 from . import forms
 from .models import Post
 from django.contrib.auth import get_user_model
+from django.contrib.postgres.search import TrigramSimilarity
 # Create your views here.
 
 def posthome(request):
@@ -13,6 +14,13 @@ def posthome(request):
     userProfile = None
     
     if query:
+        post = Post.objects.annotate(similarity=TrigramSimilarity('content', query)).filter(similarity__gt=0.1).order_by('-similarity')
+        print(post)
+        userProfile = get_user_model().objects.annotate(similarity=TrigramSimilarity('username', query)).filter(similarity__gt=0.1).order_by('-similarity')
+    else:
+        # Only order by date when NOT searching (search results are already ordered by relevance)
+        post = post.order_by('-created_at')
+    """if query:
         # Find all users matching the query
         userProfile = get_user_model().objects.filter(username__icontains=query)
         
@@ -21,9 +29,8 @@ def posthome(request):
             post = post.filter(creator__in=userProfile)
         else:
             # If no username match, search by content
-            post = post.filter(Q(content__icontains=query))
+            post = post.filter(Q(content__icontains=query))"""
     
-    post = post.order_by('-created_at')
     return render(request, 'post/posthome.html', {'post': post, 'search_query': query, 'showSearch' : False, 'userProfile': userProfile})
 
 @login_required

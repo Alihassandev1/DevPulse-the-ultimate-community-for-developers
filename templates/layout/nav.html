@@ -27,7 +27,7 @@
       </li>
     </ul>
     {% if showSearch == False %}
-    <form class="d-flex me-2" role="search" method="get" action="">
+    <form class="d-flex me-2" role="search" method="get" action="{% url 'post:posthome' %}">
       <div class="search-box d-flex ">
         <input
         class="form-control form-control-sm rounded-pill border-0" style="padding-left: 4rem; background-color: #3c5174;"
